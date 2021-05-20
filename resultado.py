@@ -128,7 +128,7 @@ class Resultado():
 
         return num_previstos_corretamente/len(self.y)
 class Fold():
-    def __init__(self,df_treino :pd.DataFrame,  df_data_to_predict:pd.DataFrame,
+    def __init__(self,df_treino :pd.DataFrame, df_data_to_predict:pd.DataFrame,
                 col_classe:str,num_folds_validacao:int=0,num_repeticoes_validacao:int=0):
         self.df_treino = df_treino
         self.df_data_to_predict = df_data_to_predict

@@ -170,9 +170,10 @@ class ExperimentoTest(unittest.TestCase):
     def test_macro_f1_avg(self):
 
         exp = self.get_experimento()
+        exp.calcula_resultados()
 
         print("Macro F1 médio:"+str(exp.macro_f1_avg))
-        self.assertAlmostEqual(exp.macro_f1_avg, 0.39380952380952383, msg="Valor inesperado de Macro F1")
+        self.assertAlmostEqual(exp.macro_f1_avg, 0.41880952380952385, msg="Valor inesperado de Macro F1")
 
 
     def test_resultados(self):
@@ -180,8 +181,8 @@ class ExperimentoTest(unittest.TestCase):
         exp = self.get_experimento()
         fold = exp.folds[0]
 
-        arrExpMacroF1 =[0.16666666666666666,0.4444444444444444,
-                        0.48888888888888893,0.6190476190476191, 0.24999999999999997]
+        arrExpMacroF1 = [0.16666666666666666,0.4444444444444444,
+                        0.48888888888888893,0.6190476190476191, 0.37499999999999994]
         exp.calcula_resultados()
 
         for i,macro_f1 in enumerate(arrExpMacroF1):
@@ -207,9 +208,9 @@ class TestObjetivoOtimizacaoRF(unittest.TestCase):
         arr_params_to_test = ["min_samples_split", "max_features", "num_arvores"]
         for param_name in arr_params_to_test:
             self.assertTrue(param_name in study_TP.best_trial.params, f"Não foi encontrado o parametro '{param_name}' certifique-se se você nomeou o parametro devidamente")
-
-        self.assertAlmostEqual(study_TP.best_trial.params["min_samples_split"],0.19829036364801306,places=5,msg="Otimização não deu resultado esperado")
-        self.assertAlmostEqual(study_TP.best_trial.params["max_features"],0.1939553705810037,places=5,msg="Otimização não deu resultado esperado")
+            
+        self.assertAlmostEqual(study_TP.best_trial.params["min_samples_split"],0.07019346929761688,places=5,msg="Otimização não deu resultado esperado")
+        self.assertAlmostEqual(study_TP.best_trial.params["max_features"],0.0990507445424394,places=5,msg="Otimização não deu resultado esperado")
         self.assertAlmostEqual(study_TP.best_trial.params["num_arvores"],5,msg="Otimização não deu resultado esperado")
         print(f"Melhor execução: {study_TP.best_trial.params}")
 
